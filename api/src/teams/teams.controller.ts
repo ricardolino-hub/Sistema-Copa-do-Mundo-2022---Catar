@@ -6,10 +6,10 @@ import { Prisma } from '@prisma/client';
 export class TeamsController {
     constructor(private readonly teamService: TeamsService){}
 
-    // @Post()
-    // async createTeam(@Body() data: Prisma.TeamCreateInput){
-    //     return this.teamService.createTeam(data);
-    // }
+    @Post()
+    async createTeam(@Body() data: Prisma.TeamCreateInput){
+        return this.teamService.createTeam(data);
+    }
 
     @Get()
     async findAllTeams(){
@@ -21,8 +21,8 @@ export class TeamsController {
     //     return this.teamService.updateTeamName(name_team, data);
     // }
 
-    @Delete(':name_team')
-    async deleteTeam(@Param('name_team') name_team: string){
-        return this.teamService.deleteTeam(name_team);
-    }
+    // @Delete(':name_team')
+    // async deleteTeam(@Param('name_team') name_team: string){
+    //     return this.teamService.deleteTeam(name_team);
+    // }
 }

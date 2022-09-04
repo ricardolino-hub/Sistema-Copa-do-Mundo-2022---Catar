@@ -45,4 +45,5 @@ model Log_Matchup{
   id_log_matchup Int @default(autoincrement()) @id
   id_matchup Matchup? @relation(fields: [id_log_matchup], references: [id_matchup])
   player Player? @relation(fields: [id_log_matchup], references: [id_player])
+  game_time Int
 }

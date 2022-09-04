@@ -16,6 +16,7 @@ export class TeamsService {
         })
 
         if(!teamRegistered){
+            console.log(data);
             const team = await this.prisma.team.create({
                 data,
             })
