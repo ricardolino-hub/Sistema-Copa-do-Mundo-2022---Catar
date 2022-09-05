@@ -6,7 +6,7 @@ import { Prisma } from '@prisma/client';
 export class TeamsController {
     constructor(private readonly teamService: TeamsService){}
 
-    @Post()
+    @Post('/post')
     async createTeam(@Body() data: Prisma.TeamCreateInput){
         return this.teamService.createTeam(data);
     }
@@ -16,13 +16,13 @@ export class TeamsController {
         return this.teamService.findAllTeams();
     }
 
-    // @Patch(':name_team')
-    // async updateTeamName(@Param('name_team') name_team: string, @Body() data: Prisma.TeamUpdateInput){
-    //     return this.teamService.updateTeamName(name_team, data);
-    // }
+    @Patch('/patch/:name_team')
+    async updateTeamName(@Param('name_team') name_team: string, @Body() data: Prisma.TeamUpdateInput){
+        return this.teamService.updateTeamName(name_team, data);
+    }
 
-    // @Delete(':name_team')
-    // async deleteTeam(@Param('name_team') name_team: string){
-    //     return this.teamService.deleteTeam(name_team);
-    // }
+    @Delete('/delete/:name_team')
+    async deleteTeam(@Param('name_team') name_team: string){
+        return this.teamService.deleteTeam(name_team);
+    }
 }

@@ -13,21 +13,24 @@ export class TeamsService {
             where:{
                 name_team: data.name_team
             }
-        })
+        });
 
         if(!teamRegistered){
-            console.log(data);
             const team = await this.prisma.team.create({
                 data,
             })
-            return team
+            return team;
         }else{
-            throw new Error('Team already registered')
+            throw new Error('Team already registered');
         }
     }
 
     async findAllTeams(){
-        return this.prisma.team.findMany();
+        return await this.prisma.team.findMany({
+            include:{
+                players:true
+            }
+        });
     }
 
     async updateTeamName(name_team: string, data: Prisma.TeamUpdateInput){
@@ -43,10 +46,10 @@ export class TeamsService {
                 where: {
                     name_team
                 }
-            })
-            return team
+            });
+            return team;
         }else{
-            throw new Error('Team not found')
+            throw new Error('Team not found');
         }
     }
 
@@ -55,17 +58,15 @@ export class TeamsService {
             where: {
                 name_team
             }
-        })
+        });
 
         if (teamRegistered){
             const team = await this.prisma.team.delete({
-                where: {
-                    name_team
-                }
-            })
-            return team
+                where: {name_team}
+            });
+            return team;
         }else{
-            throw new Error('Team not found')
+            throw new Error('Team not found');
         }
     }
 }

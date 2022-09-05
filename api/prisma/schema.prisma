@@ -8,32 +8,32 @@ datasource db {
 }
 
 model Team{
-  id_team Int @default(autoincrement()) @id
-  name_team String @unique
-  players Player[]
+  id_team      Int @default(autoincrement()) @id
+  name_team    String @unique
+  players      Player[]
   matchps_team Matchup_Team[]
 }
 
 model Player{
-  id_player Int @default(autoincrement()) @id
-  name_player String
+  id_player     Int @default(autoincrement()) @id
+  name_player   String
   number_player Int
-  id_team Team? @relation(fields: [id_player], references: [id_team])
-  logs_matchup Log_Matchup[]
+  id_team       Team? @relation(fields: [id_player], references: [id_team])
+  logs_matchup  Log_Matchup[]
 }
 
 model Matchup{
-  id_matchup Int @default(autoincrement()) @id
+  id_matchup   Int @default(autoincrement()) @id
   date_matchup DateTime
   matchps_team Matchup_Team[]
   logs_matchup Log_Matchup[]
 }
 
 model Matchup_Team{
-  id_matchp_team Int @default(autoincrement()) @id
-  id_team Team? @relation(fields: [id_matchp_team], references: [id_team])
-  id_matchup Matchup? @relation(fields: [id_matchp_team], references: [id_matchup])
-  qtd_gols Int?
+  id_matchup_team Int @default(autoincrement()) @id
+  qtd_gols        Int
+  id_team         Team? @relation(fields: [id_matchup_team], references: [id_team])
+  id_matchup      Matchup? @relation(fields: [id_matchup_team], references: [id_matchup])
 }
 
 model Type_Log{
@@ -43,7 +43,7 @@ model Type_Log{
 
 model Log_Matchup{
   id_log_matchup Int @default(autoincrement()) @id
-  id_matchup Matchup? @relation(fields: [id_log_matchup], references: [id_matchup])
-  player Player? @relation(fields: [id_log_matchup], references: [id_player])
-  game_time Int
+  game_time      Int
+  id_matchup     Matchup? @relation(fields: [id_log_matchup], references: [id_matchup])
+  player         Player? @relation(fields: [id_log_matchup], references: [id_player])
 }
