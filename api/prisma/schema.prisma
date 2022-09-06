@@ -15,11 +15,12 @@ model Team{
 }
 
 model Player{
-  id_player     Int @default(autoincrement()) @id
-  name_player   String
-  number_player Int
-  id_team       Team? @relation(fields: [id_player], references: [id_team])
-  logs_matchup  Log_Matchup[]
+  id_player      Int @default(autoincrement()) @id
+  name_player    String
+  number_player  Int
+  id_player_team Int
+  id_team        Team? @relation(fields: [id_player_team], references: [id_team])
+  logs_matchup   Log_Matchup[]
 }
 
 model Matchup{
@@ -30,20 +31,27 @@ model Matchup{
 }
 
 model Matchup_Team{
-  id_matchup_team Int @default(autoincrement()) @id
-  qtd_gols        Int
-  id_team         Team? @relation(fields: [id_matchup_team], references: [id_team])
-  id_matchup      Matchup? @relation(fields: [id_matchup_team], references: [id_matchup])
+  id_matchup_team  Int @default(autoincrement()) @id
+  qtd_gols         Int
+  id_matchup_team2 Int
+  id_matchup2_team Int
+  id_team          Team? @relation(fields: [id_matchup_team2], references: [id_team])
+  id_matchup       Matchup? @relation(fields: [id_matchup2_team], references: [id_matchup])
 }
 
 model Type_Log{
     id_type_log Int @default(autoincrement()) @id
     description String @unique
+    logs_matchup Log_Matchup[]
 }
 
 model Log_Matchup{
-  id_log_matchup Int @default(autoincrement()) @id
-  game_time      Int
-  id_matchup     Matchup? @relation(fields: [id_log_matchup], references: [id_matchup])
-  player         Player? @relation(fields: [id_log_matchup], references: [id_player])
+  id_log_matchup        Int @default(autoincrement()) @id
+  game_time             Int
+  id_log_matchup2       Int
+  id_log_matchup_player Int
+  id_log_matchup_type   Int
+  id_matchup            Matchup? @relation(fields: [id_log_matchup2], references: [id_matchup])
+  player                Player? @relation(fields: [id_log_matchup_player], references: [id_player])
+  type_log              Type_Log? @relation(fields: [id_log_matchup_type], references: [id_type_log])
 }

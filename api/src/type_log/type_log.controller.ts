@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { TypeLogMultipleCreateInput } from '../dto/typeLogMultipleDTO';
 import { TypeLogService } from './type_log.service';
 
 @Controller('type-log')
@@ -9,6 +10,11 @@ export class TypeLogController {
     @Post('/post')
     async createTypeLog(@Body() data: Prisma.Type_LogCreateInput){
         return this.typeLogService.createTypeLog(data);
+    }
+
+    @Post('/post/multiple')
+    async createMultipleTypeLog(@Body() data: TypeLogMultipleCreateInput){
+        return this.typeLogService.createMultipleTypeLog(data);
     }
 
     @Get()

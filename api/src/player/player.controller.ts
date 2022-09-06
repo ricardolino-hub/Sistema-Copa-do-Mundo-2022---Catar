@@ -1,5 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { PlayerMultipleCreateInput } from '../dto/playerMultipleDTO';
 import { PlayerService } from './player.service';
 
 @Controller('player')
@@ -9,6 +10,11 @@ export class PlayerController {
     @Post('/post')
     async createPlayer(@Body() data: Prisma.PlayerCreateInput){
         return this.playerService.createPlayer(data);
+    }
+
+    @Post('/post/multiple')
+    async createMultiplePlayers(@Body() data: PlayerMultipleCreateInput){
+        return this.playerService.createMultiplePlayers(data);
     }
 
     @Get()

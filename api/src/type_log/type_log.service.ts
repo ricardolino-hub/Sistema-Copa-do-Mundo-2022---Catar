@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { TypeLogMultipleCreateInput } from '../dto/typeLogMultipleDTO';
 import { PrismaService } from '../database/PrismaService';
 
 @Injectable()
@@ -18,6 +19,16 @@ export class TypeLogService {
         }else{
             throw new Error('Log Type alredy registered')
         }
+    }
+
+    async createMultipleTypeLog(data: TypeLogMultipleCreateInput){
+        if(!data){
+            throw new Error('Without data')
+        }
+
+        data.type_logs.forEach(async item => {
+            await this.createTypeLog(item)
+        });
     }
 
     async findAllTypeLog(){

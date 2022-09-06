@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { TeamsMultipleCreateInput } from '../dto/teamMultipleDTO';
 import { PrismaService } from '../database/PrismaService';
 
 @Injectable()
@@ -23,6 +24,16 @@ export class TeamsService {
         }else{
             throw new Error('Team already registered');
         }
+    }
+
+    async createMultipleTeams(data: TeamsMultipleCreateInput){
+        if(!data){
+            throw new Error('Without data')
+        }
+
+        data.teams.forEach(async item => {
+            await this.createTeam(item)
+        })
     }
 
     async findAllTeams(){

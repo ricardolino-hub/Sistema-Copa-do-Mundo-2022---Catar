@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
+import { PlayerMultipleCreateInput } from '../dto/playerMultipleDTO';
 import { PrismaService } from '../database/PrismaService';
 
 @Injectable()
@@ -8,6 +9,16 @@ export class PlayerService {
 
     async createPlayer(data: Prisma.PlayerCreateInput){
         return await this.prisma.player.create({data});
+    }
+
+    async createMultiplePlayers(data: PlayerMultipleCreateInput){
+        if(!data){
+            throw new Error('Without data')
+        }
+
+        data.players.forEach(async item => {
+            await this.createPlayer(item)
+        });
     }
 
     async findPlayers(){

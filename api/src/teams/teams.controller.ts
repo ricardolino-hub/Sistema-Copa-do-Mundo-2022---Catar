@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { TeamsService } from './teams.service';
 import { Prisma } from '@prisma/client';
+import { TeamsMultipleCreateInput } from '../dto/teamMultipleDTO';
 
 @Controller('teams')
 export class TeamsController {
@@ -9,6 +10,11 @@ export class TeamsController {
     @Post('/post')
     async createTeam(@Body() data: Prisma.TeamCreateInput){
         return this.teamService.createTeam(data);
+    }
+
+    @Post('/post/multiple')
+    async createMultipleTeams(@Body() data: TeamsMultipleCreateInput){
+        return this.teamService.createMultipleTeams(data);
     }
 
     @Get()
