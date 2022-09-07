@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 
-class MatchupDate{
+class Matchup{
   late String homeTeam;
   late String visit;
   late int homeTeamGols;
@@ -14,9 +14,9 @@ class MatchupDate{
   //              required this.homeTeamGols, required this.visiteGols,
   //              required this.date, required this.logs});
   
-  MatchupDate.fromJson(Map<String, dynamic> json){
-    homeTeam = teams[json["matchps_team"][0]["id_matchup_team2"]];
-    visit = teams[json["matchps_team"][1]["id_matchup_team2"]];
+  Matchup.fromJson(Map<String, dynamic> json){
+    homeTeam = teams[json["matchps_team"][0]["id_matchup_team2"]-1];
+    visit = teams[json["matchps_team"][1]["id_matchup_team2"]-1];
     homeTeamGols = json["matchps_team"][0]["qtd_gols"];
     visiteGols = json["matchps_team"][1]["qtd_gols"];
     date = json["date_matchup"];

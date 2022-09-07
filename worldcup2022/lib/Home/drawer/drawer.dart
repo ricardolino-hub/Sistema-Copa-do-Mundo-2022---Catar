@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../Players/players.dart';
+import 'players.dart';
 import '../api/api.dart';
 
 Widget createDrawer(context){
@@ -10,13 +10,11 @@ Widget createDrawer(context){
         switch(snapshot.connectionState){
           case ConnectionState.none:
           case ConnectionState.waiting:
-            print('esperando');
-            Center(child: CircularProgressIndicator());
+            const Center(child: CircularProgressIndicator());
             break;
           case ConnectionState.active:
           case ConnectionState.done:
             if(snapshot.hasData){
-              List teamsPlayers = snapshot.data!;
               return ListView.builder( 
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index){

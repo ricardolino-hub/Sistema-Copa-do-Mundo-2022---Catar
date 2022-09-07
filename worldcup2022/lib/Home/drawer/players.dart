@@ -8,7 +8,7 @@ class Players extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Copa do Mundo 2022'),
+        title: const Text('Copa do Mundo 2022 - Jogadores'),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 170, 3, 47),
       ),
