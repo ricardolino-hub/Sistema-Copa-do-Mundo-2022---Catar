@@ -25,7 +25,12 @@ export class MatchupService {
     }
 
     async findAllMatchup(){
-        return await this.prisma.matchup.findMany();
+        return await this.prisma.matchup.findMany({
+            include:{
+                matchps_team:true,
+                logs_matchup:true
+            }
+        });
     }
 
     async updateMatchup(id_matchup: number, data: Prisma.MatchupUpdateInput){

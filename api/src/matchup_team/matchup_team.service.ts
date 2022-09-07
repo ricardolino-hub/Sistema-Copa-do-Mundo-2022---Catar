@@ -7,7 +7,7 @@ export class MatchupTeamService {
 
     constructor(private prisma: PrismaService){}
 
-    async createMatchupTeam(data: Prisma.Matchup_TeamUncheckedCreateInput){
+    async createMatchupTeam(data: Prisma.Matchup_TeamCreateInput){
         return await this.prisma.matchup_Team.create({data});
     }
 

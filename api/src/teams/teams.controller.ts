@@ -22,6 +22,11 @@ export class TeamsController {
         return this.teamService.findAllTeams();
     }
 
+    @Get('/players')
+    async findAllTeamsWithPlayers(){
+        return this.teamService.findAllTeamsWithPlayers();
+    }
+
     @Patch('/patch/:name_team')
     async updateTeamName(@Param('name_team') name_team: string, @Body() data: Prisma.TeamUpdateInput){
         return this.teamService.updateTeamName(name_team, data);

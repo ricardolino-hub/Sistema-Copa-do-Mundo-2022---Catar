@@ -37,6 +37,10 @@ export class TeamsService {
     }
 
     async findAllTeams(){
+        return await this.prisma.team.findMany();
+    }
+
+    async findAllTeamsWithPlayers(){
         return await this.prisma.team.findMany({
             include:{
                 players:true
