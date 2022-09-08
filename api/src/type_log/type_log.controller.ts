@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 import { TypeLogMultipleCreateInput } from '../dto/typeLogMultipleDTO';
 import { TypeLogService } from './type_log.service';
 
-@Controller('type-log')
+@Controller('type-logs')
 export class TypeLogController {
     constructor(private readonly typeLogService: TypeLogService){}
 

@@ -3,7 +3,7 @@ import { Prisma } from '@prisma/client';
 import { PlayerMultipleCreateInput } from '../dto/playerMultipleDTO';
 import { PlayerService } from './player.service';
 
-@Controller('player')
+@Controller('players')
 export class PlayerController {
     constructor(private readonly playerService: PlayerService){}
 

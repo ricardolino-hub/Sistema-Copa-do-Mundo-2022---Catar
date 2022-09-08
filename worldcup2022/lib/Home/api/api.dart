@@ -5,8 +5,14 @@ import 'package:worldcup2022/Home/models/player.dart';
 import 'package:worldcup2022/Home/models/typeLog.dart';
 
 class Api {
+  static String urlBase = 'http://localhost:3000';
+  // static String urlBase = 'http://ipMaquina:3000';
+  /**
+   * Para funcionar em outros dispositivos é necessário informar o ip da máquina e que os outros dispositivos estejam na mesma rede
+   */
+
   static Future<List> getTeamsAndPlayers() async {
-    Uri url = Uri.parse('http://localhost:3000/teams/players');
+    Uri url = Uri.parse(urlBase + '/teams/players');
     http.Response response = await http.get(url);
     if (response.statusCode == 200) {
       return json.decode(response.body);
@@ -16,7 +22,7 @@ class Api {
   }
 
   static Future<List<Matchup>> getMatchups() async{
-    Uri url = Uri.parse('http://localhost:3000/matchup');
+    Uri url = Uri.parse(urlBase + '/matchups');
     try{
       http.Response response = await http.get(url);
       List<Matchup> matchups = json.decode(response.body).map<Matchup>((item) => Matchup.fromJson(item)).toList();
@@ -27,7 +33,7 @@ class Api {
   }
 
   static Future<List<Player>> getPlayers() async{
-    Uri url = Uri.parse('http://localhost:3000/player');
+    Uri url = Uri.parse(urlBase + '/players');
     try{
       http.Response response = await http.get(url);
       List<Player> players = json.decode(response.body).map<Player>((item) => Player.fromJson(item)).toList();
@@ -38,7 +44,7 @@ class Api {
   }
 
   static Future<List<TypeLog>> getTypeLog() async{
-    Uri url = Uri.parse('http://localhost:3000/type-log');
+    Uri url = Uri.parse(urlBase + '/type-logs');
     try{
       http.Response response = await http.get(url);
       List<TypeLog> typeLogs = json.decode(response.body).map<TypeLog>((item) => TypeLog.fromJson(item)).toList();

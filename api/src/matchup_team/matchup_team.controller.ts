@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/commo
 import { Prisma } from '@prisma/client';
 import { MatchupTeamService } from './matchup_team.service';
 
-@Controller('matchup-team')
+@Controller('matchups-teams')
 export class MatchupTeamController {
     constructor(private readonly matchupTeamService: MatchupTeamService){}
 
