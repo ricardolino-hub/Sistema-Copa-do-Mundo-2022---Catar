@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Players extends StatelessWidget {
-  const Players({Key? key, required this.players}) : super(key: key);
+  const Players({Key? key, required this.players, required this.nameTeam}) : super(key: key);
   final List players;
+  final String nameTeam;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Copa do Mundo 2022 - Jogadores'),
+        title: Text('${nameTeam} - Jogadores'),
         centerTitle: true,
         backgroundColor: Color.fromARGB(255, 170, 3, 47),
       ),

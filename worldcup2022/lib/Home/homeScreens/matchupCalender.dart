@@ -32,17 +32,14 @@ class _MatchupCalenderState extends State<MatchupCalender> {
     await Api.getMatchups().then((schedules){
       for (var event in schedules){
         listEvents.add(Event(
-          titleEvent: '${event.homeTeam} ${event.homeTeamGols} x ${event.visiteGols} ${event.visit}',
+          idHomeTeamEvent: event.idHomeTeam,
+          idVisitEvent: event.idVisit,
+          titleEvent: '${event.homeTeam.padRight(16)}${event.homeTeamGols.toString().padRight(2)}x${event.visiteGols.toString().padLeft(2)}${event.visit.padLeft(16)}',
           subtitleEventHours: '${DateTime.parse(event.date).hour - 3}:${DateTime.parse(event.date).minute}0',
           dateEvent: DateTime.parse(event.date),
           logsEvent: event.logs
         ));
       }
-      // for (var event in listEvents){
-      //   print(
-      //     '${event.titleEvent} ${event.dateEvent.toString()}',
-      //   );
-      // }
     });
     _groupEvents(listEvents);
   }
@@ -131,23 +128,31 @@ class _MatchupCalenderState extends State<MatchupCalender> {
                 shape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(5.0)),
                 ),
-                child: ListTile(
-                  title: Text(
-                    event.titleEvent,
-                    textAlign: TextAlign.center,
+                child: Center(
+                  child: ListTile(
+                    title: Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Text(
+                        event.titleEvent,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    subtitle: Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Text(
+                        event.subtitleEventHours,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(
+                          builder: (context) => LogMatchups(game: event)
+                          )
+                      );
+                    },
                   ),
-                  subtitle: Text(
-                    event.subtitleEventHours,
-                    textAlign: TextAlign.center,
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context, 
-                      MaterialPageRoute(
-                        builder: (context) => LogMatchups(logs: event.logsEvent,)
-                        )
-                    );
-                  },
                 ),
               ))
             ],

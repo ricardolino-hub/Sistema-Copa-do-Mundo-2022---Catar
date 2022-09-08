@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'players.dart';
+import 'playersScreen.dart';
 import '../api/api.dart';
 
 Widget createDrawer(context){
@@ -19,14 +19,14 @@ Widget createDrawer(context){
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index){
                   return ListTile(
-                    textColor: const Color.fromARGB(255, 170, 3, 47),
-                    leading: const Icon(Icons.sports_soccer_sharp),
+                    // textColor: const Color.fromARGB(255, 170, 3, 47),
+                    leading: const Icon(Icons.sports_soccer_sharp, color: Color.fromARGB(255, 170, 3, 47),),
                     title: Text(snapshot.data![index]["name_team"]),
                     onTap: () {
                       Navigator.push(
                         context, 
                         MaterialPageRoute(
-                        builder: (context) => Players(players: snapshot.data![index]["players"],)
+                        builder: (context) => Players(players: snapshot.data![index]["players"], nameTeam: snapshot.data![index]["name_team"],)
                         )
                       );
                     },
